@@ -1,5 +1,6 @@
 {
   "name": "toyi/identifier",
+  "description": "Identify your SQL entries with a string instead of a numeric ID.",
   "type": "library",
   "authors": [
     {
