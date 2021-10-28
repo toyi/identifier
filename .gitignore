@@ -1,2 +1,6 @@
+.idea
+.phpunit.result.cache
+.rnd
+.editorconfig
 vendor
 composer.lock
