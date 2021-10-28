@@ -1,0 +1,35 @@
+{
+  "name": "toyi/identifier",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Anthony Aslangul",
+      "email": "anthony.aslangul@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "illuminate/database": "^7.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^5.0",
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Toyi\\Identifier\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Toyi\\Identifier\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Toyi\\Identifier\\IdentifierServiceProvider"
+      ]
+    }
+  }
+}
