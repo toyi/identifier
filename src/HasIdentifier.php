@@ -17,7 +17,7 @@ trait HasIdentifier
     /**
      * @param string $identifier
      * @param array $attributes
-     * @return mixed
+     * @return HasIdentifier|null
      */
     public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
