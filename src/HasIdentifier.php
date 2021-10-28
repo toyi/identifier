@@ -19,7 +19,7 @@ trait HasIdentifier
      * @param array $attributes
      * @return mixed
      */
-    public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): static
+    public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
         return static::query()->where(static::getIdentifierKey(), '=', $identifier)->first($attributes);
     }
