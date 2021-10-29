@@ -19,12 +19,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Toyi\\Identifier\\": "src/"
+      "Toyi\\LaravelIdentifier\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Toyi\\Identifier\\Tests\\": "tests/"
+      "Toyi\\LaravelIdentifier\\Tests\\": "tests/"
     }
   },
   "extra": {

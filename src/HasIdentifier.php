@@ -1,9 +1,9 @@
-<?php namespace Toyi\Identifier;
+<?php namespace Toyi\LaravelIdentifier;
 
 /**
  * Trait HasIdentifier
  *
- * @package Toyi\Identifier
+ * @package Toyi\LaravelIdentifier
  */
 trait HasIdentifier
 {

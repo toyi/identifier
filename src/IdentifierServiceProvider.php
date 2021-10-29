@@ -1,4 +1,4 @@
-<?php namespace Toyi\Identifier;
+<?php namespace Toyi\LaravelIdentifier;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\ServiceProvider;
