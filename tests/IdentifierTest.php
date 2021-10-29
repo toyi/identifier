@@ -1,4 +1,4 @@
-<?php namespace Toyi\LaravelIdentifier\Tests;
+<?php namespace Toyi\Identifier\Tests;
 
 class IdentifierTest extends TestCase
 {

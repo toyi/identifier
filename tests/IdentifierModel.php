@@ -1,7 +1,7 @@
-<?php namespace Toyi\LaravelIdentifier\Tests;
+<?php namespace Toyi\Identifier\Tests;
 
 use Illuminate\Database\Eloquent\Model;
-use Toyi\LaravelIdentifier\HasIdentifier;
+use Toyi\Identifier\HasIdentifier;
 
 class IdentifierModel extends Model
 {

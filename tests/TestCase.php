@@ -1,9 +1,9 @@
-<?php namespace Toyi\LaravelIdentifier\Tests;
+<?php namespace Toyi\Identifier\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
-use Toyi\LaravelIdentifier\IdentifierServiceProvider;
+use Toyi\Identifier\IdentifierServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

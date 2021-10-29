@@ -1,5 +1,5 @@
 {
-  "name": "toyi/laravel-identifier",
+  "name": "toyi/identifier",
   "description": "Identify your SQL entries with a string instead of a numeric ID.",
   "license": "MIT",
   "type": "library",
@@ -19,12 +19,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Toyi\\LaravelIdentifier\\": "src/"
+      "Toyi\\Identifier\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Toyi\\LaravelIdentifier\\Tests\\": "tests/"
+      "Toyi\\Identifier\\Tests\\": "tests/"
     }
   },
   "extra": {
