@@ -1,5 +1,5 @@
 {
-  "name": "toyi/identifier",
+  "name": "toyi/laravel-identifier",
   "description": "Identify your SQL entries with a string instead of a numeric ID.",
   "license": "MIT",
   "type": "library",
