@@ -17,11 +17,25 @@ trait HasIdentifier
     /**
      * @param string $identifier
      * @param array $attributes
-     * @return HasIdentifier|null
+     * @return mixed
      */
     public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
-        return static::query()->where(static::getIdentifierKey(), '=', $identifier)->first($attributes);
+        if(!in_array('*', $attributes) && !in_array('id', $attributes)){
+            $attributes[] = 'id';
+        }
+
+        if (static::identifierHasBeenFetched($identifier)) {
+            return static::$fetchedIdentifiers[static::class][$identifier];
+        }
+
+        $model = static::query()->where(static::getIdentifierKey(), '=', $identifier)->first($attributes);
+
+        if ($model != null) {
+            static::$fetchedIdentifiers[static::class][$identifier] = $model;
+        }
+
+        return $model;
     }
 
     /**
@@ -30,17 +44,9 @@ trait HasIdentifier
      */
     public static function getIdByIdentifier(string $identifier): mixed
     {
-        if (static::identifierHasBeenFetched($identifier)) {
-            return static::$fetchedIdentifiers[static::class][$identifier];
-        }
+        static::getModelByIdentifier($identifier, ['id']);
 
-        $id = optional(static::getModelByIdentifier($identifier, ['id']))->id;
-
-        if ($id != null) {
-            static::$fetchedIdentifiers[static::class][$identifier] = $id;
-        }
-
-        return $id;
+        return optional(static::$fetchedIdentifiers[static::class][$identifier])->id;
     }
 
     public static function checkIdentifier(mixed $id, string $identifier): bool
