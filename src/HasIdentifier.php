@@ -21,7 +21,7 @@ trait HasIdentifier
      */
     public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
-        if(!in_array('*', $attributes) && !in_array('id', $attributes)){
+        if (!in_array('*', $attributes) && !in_array('id', $attributes)) {
             $attributes[] = 'id';
         }
 
@@ -68,6 +68,12 @@ trait HasIdentifier
     {
         static::$fetchedIdentifiers[static::class] = null;
         unset(static::$fetchedIdentifiers[static::class]);
+    }
+
+    protected function finishSave(array $options)
+    {
+        static::resetFetchedIdentifiers();
+        parent::finishSave($options);
     }
 
     public function __toString()
