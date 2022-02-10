@@ -51,15 +51,38 @@ class IdentifierTest extends TestCase
     {
         IdentifierModel::resetFetchedIdentifiers();
 
-        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar'));
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.id'));
 
         IdentifierModel::getIdByIdentifier('bar');
 
-        $this->assertTrue(IdentifierModel::identifierHasBeenFetched('bar'));
+        $this->assertTrue(IdentifierModel::identifierHasBeenFetched('bar.id'));
 
         IdentifierModel::resetFetchedIdentifiers();
 
-        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar'));
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.id'));
+    }
+
+    public function test_identifier_are_cached_the_first_time_they_are_retrieved_with_model()
+    {
+        IdentifierModel::resetFetchedIdentifiers();
+
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.*'));
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.id'));
+
+        IdentifierModel::getModelByIdentifier('bar');
+
+        $this->assertTrue(IdentifierModel::identifierHasBeenFetched('bar.*'));
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.id'));
+
+        IdentifierModel::getIdByIdentifier('bar');
+
+        $this->assertTrue(IdentifierModel::identifierHasBeenFetched('bar.*'));
+        $this->assertTrue(IdentifierModel::identifierHasBeenFetched('bar.id'));
+
+        IdentifierModel::resetFetchedIdentifiers();
+
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.*'));
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.id'));
     }
 
     public function test_identifier_can_be_based_on_another_key()

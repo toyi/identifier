@@ -25,14 +25,16 @@ trait HasIdentifier
             $attributes[] = 'id';
         }
 
-        if (static::identifierHasBeenFetched($identifier)) {
-            return static::$fetchedIdentifiers[static::class][$identifier];
+        $cache_key = static::identifierCacheKey($identifier, $attributes);
+
+        if (static::identifierHasBeenFetched($cache_key)) {
+            return static::$fetchedIdentifiers[static::class][$cache_key];
         }
 
         $model = static::query()->where(static::getIdentifierKey(), '=', $identifier)->first($attributes);
 
         if ($model != null) {
-            static::$fetchedIdentifiers[static::class][$identifier] = $model;
+            static::$fetchedIdentifiers[static::class][$cache_key] = $model;
         }
 
         return $model;
@@ -44,9 +46,10 @@ trait HasIdentifier
      */
     public static function getIdByIdentifier(string $identifier): mixed
     {
-        static::getModelByIdentifier($identifier, ['id']);
+        $attributes = ['id'];
+        static::getModelByIdentifier($identifier, $attributes);
 
-        return optional(static::$fetchedIdentifiers[static::class][$identifier] ?? null)->id;
+        return optional(static::$fetchedIdentifiers[static::class][static::identifierCacheKey($identifier, $attributes)] ?? null)->id;
     }
 
     public static function checkIdentifier(mixed $id, string $identifier): bool
@@ -59,9 +62,9 @@ trait HasIdentifier
         return optional(static::query()->find($id))->identifier;
     }
 
-    public static function identifierHasBeenFetched(string $identifier): bool
+    public static function identifierHasBeenFetched(string $key): bool
     {
-        return isset(static::$fetchedIdentifiers[static::class][$identifier]);
+        return isset(static::$fetchedIdentifiers[static::class][$key]);
     }
 
     public static function resetFetchedIdentifiers(): void
@@ -79,5 +82,10 @@ trait HasIdentifier
     public function __toString()
     {
         return $this->{static::getIdentifierKey()};
+    }
+
+    private static function identifierCacheKey(string $identifier, array $attributes): string
+    {
+        return $identifier . '.' . implode('.', $attributes);
     }
 }
