@@ -61,9 +61,6 @@ trait HasIdentifier
     {
         return optional(static::query()->find($id))->identifier;
     }
-
-
-
     
     public static function identifierHasBeenFetched(string $key): bool
     {
