@@ -47,9 +47,9 @@ trait HasIdentifier
     public static function getIdByIdentifier(string $identifier): mixed
     {
         $attributes = ['id'];
-        static::getModelByIdentifier($identifier, $attributes);
+        $model = static::getModelByIdentifier($identifier, $attributes);
 
-        return optional(static::$fetchedIdentifiers[static::class][static::identifierCacheKey($identifier, $attributes)] ?? null)->id;
+        return optional($model)->id;
     }
 
     public static function checkIdentifier(mixed $id, string $identifier): bool
