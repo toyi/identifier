@@ -9,25 +9,32 @@ trait HasIdentifier
 {
     protected static array $fetchedIdentifiers = [];
 
+    protected static function bootHasIdentifier()
+    {
+        if (config('identifier.cache.enabled') === false) {
+            static::resetFetchedIdentifiers();
+        }
+    }
+
     public static function getIdentifierKey(): string
     {
         return 'identifier';
     }
 
     /**
-     * @param  string  $identifier
-     * @param  array  $attributes
+     * @param string $identifier
+     * @param array $attributes
      * @return mixed
      */
     public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
-        if (! in_array('*', $attributes) && ! in_array('id', $attributes)) {
+        if (!in_array('*', $attributes) && !in_array('id', $attributes)) {
             $attributes[] = 'id';
         }
 
         $cache_key = static::identifierCacheKey($identifier, $attributes);
 
-        if (static::identifierHasBeenFetched($cache_key)) {
+        if (static::identifierHasBeenFetched($cache_key) && config('identifier.cache.enabled')) {
             return static::$fetchedIdentifiers[static::class][$cache_key];
         }
 
@@ -41,7 +48,7 @@ trait HasIdentifier
     }
 
     /**
-     * @param  string  $identifier
+     * @param string $identifier
      * @return mixed
      */
     public static function getIdByIdentifier(string $identifier): mixed
@@ -86,6 +93,6 @@ trait HasIdentifier
 
     private static function identifierCacheKey(string $identifier, array $attributes): string
     {
-        return $identifier.'.'.implode('.', $attributes);
+        return $identifier . '.' . implode('.', $attributes);
     }
 }
