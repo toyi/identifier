@@ -93,7 +93,7 @@ class IdentifierTest extends TestCase
     public function test_identifier_are_not_cached_when_its_disabled()
     {
         Config::set('identifier.cache.enabled', false);
-        
+
         IdentifierModel::resetFetchedIdentifiers();
 
         $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.*'));

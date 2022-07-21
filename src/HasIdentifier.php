@@ -22,13 +22,13 @@ trait HasIdentifier
     }
 
     /**
-     * @param string $identifier
-     * @param array $attributes
+     * @param  string  $identifier
+     * @param  array  $attributes
      * @return mixed
      */
     public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
-        if (!in_array('*', $attributes) && !in_array('id', $attributes)) {
+        if (! in_array('*', $attributes) && ! in_array('id', $attributes)) {
             $attributes[] = 'id';
         }
 
@@ -48,7 +48,7 @@ trait HasIdentifier
     }
 
     /**
-     * @param string $identifier
+     * @param  string  $identifier
      * @return mixed
      */
     public static function getIdByIdentifier(string $identifier): mixed
@@ -93,6 +93,6 @@ trait HasIdentifier
 
     private static function identifierCacheKey(string $identifier, array $attributes): string
     {
-        return $identifier . '.' . implode('.', $attributes);
+        return $identifier.'.'.implode('.', $attributes);
     }
 }
