@@ -1,8 +1,13 @@
-<?php namespace Toyi\Identifier\Tests;
+<?php
+
+namespace Toyi\Identifier\Tests;
+
+use Illuminate\Support\Facades\Config;
 
 class IdentifierTest extends TestCase
 {
     protected IdentifierModel $foo;
+
     protected IdentifierModel $bar;
 
     protected function setUp(): void
@@ -83,6 +88,19 @@ class IdentifierTest extends TestCase
 
         $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.*'));
         $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.id'));
+    }
+
+    public function test_identifier_are_not_cached_when_its_disabled()
+    {
+        Config::set('identifier.cache.enabled', false);
+        
+        IdentifierModel::resetFetchedIdentifiers();
+
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.*'));
+
+        IdentifierModel::getModelByIdentifier('bar');
+
+        $this->assertFalse(IdentifierModel::identifierHasBeenFetched('bar.*'));
     }
 
     public function test_identifier_can_be_based_on_another_key()

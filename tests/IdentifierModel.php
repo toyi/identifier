@@ -1,4 +1,6 @@
-<?php namespace Toyi\Identifier\Tests;
+<?php
+
+namespace Toyi\Identifier\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use Toyi\Identifier\HasIdentifier;

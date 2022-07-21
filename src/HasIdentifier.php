@@ -1,9 +1,9 @@
-<?php namespace Toyi\Identifier;
+<?php
+
+namespace Toyi\Identifier;
 
 /**
  * Trait HasIdentifier
- *
- * @package Toyi\Identifier
  */
 trait HasIdentifier
 {
@@ -15,13 +15,13 @@ trait HasIdentifier
     }
 
     /**
-     * @param string $identifier
-     * @param array $attributes
+     * @param  string  $identifier
+     * @param  array  $attributes
      * @return mixed
      */
     public static function getModelByIdentifier(string $identifier, array $attributes = ['*']): ?static
     {
-        if (!in_array('*', $attributes) && !in_array('id', $attributes)) {
+        if (! in_array('*', $attributes) && ! in_array('id', $attributes)) {
             $attributes[] = 'id';
         }
 
@@ -33,7 +33,7 @@ trait HasIdentifier
 
         $model = static::query()->where(static::getIdentifierKey(), '=', $identifier)->first($attributes);
 
-        if ($model != null) {
+        if ($model != null && config('identifier.cache.enabled')) {
             static::$fetchedIdentifiers[static::class][$cache_key] = $model;
         }
 
@@ -41,7 +41,7 @@ trait HasIdentifier
     }
 
     /**
-     * @param string $identifier
+     * @param  string  $identifier
      * @return mixed
      */
     public static function getIdByIdentifier(string $identifier): mixed
@@ -86,6 +86,6 @@ trait HasIdentifier
 
     private static function identifierCacheKey(string $identifier, array $attributes): string
     {
-        return $identifier . '.' . implode('.', $attributes);
+        return $identifier.'.'.implode('.', $attributes);
     }
 }

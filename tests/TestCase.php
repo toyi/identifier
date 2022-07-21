@@ -1,4 +1,6 @@
-<?php namespace Toyi\Identifier\Tests;
+<?php
+
+namespace Toyi\Identifier\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +24,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            IdentifierServiceProvider::class
+            IdentifierServiceProvider::class,
         ];
     }
 }
