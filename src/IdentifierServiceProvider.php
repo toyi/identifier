@@ -15,7 +15,7 @@ class IdentifierServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/identifier.php' => config_path('identifier.php'),
-        ], 'laravel-api');
+        ], 'identifier');
 
         $this->mergeConfigFrom(__DIR__.'/../config/identifier.php', 'identifier');
     }
