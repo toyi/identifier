@@ -66,7 +66,7 @@ trait HasIdentifier
 
     public static function getIdentifierById(mixed $id): mixed
     {
-        return optional(static::query()->find($id))->identifier;
+        return optional(static::query()->find($id))->{static::getIdentifierKey()};
     }
 
     public static function identifierHasBeenFetched(string $key): bool
