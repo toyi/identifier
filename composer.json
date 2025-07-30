@@ -1,6 +1,6 @@
 {
   "name": "toyi/identifier",
-  "description": "Identify your SQL entries with a string instead of a numeric ID.",
+  "description": "Identify your SQL rows with a string instead of a numeric ID.",
   "license": "MIT",
   "type": "library",
   "authors": [
@@ -10,8 +10,9 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
-    "illuminate/database": ">=7.0"
+    "php": ">=8.2",
+    "illuminate/database": ">=7.0",
+    "illuminate/http": ">=7.0"
   },
   "require-dev": {
     "orchestra/testbench": "^7.0",
