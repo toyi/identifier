@@ -24,7 +24,7 @@ class IdentifiableCollection extends ResourceCollection
         }
 
         if(!method_exists($model, 'getIdentifierKey')){
-            throw new Exception("{$model::class} does not use HasIdentifier trait from toyi/identifier.");
+            throw new Exception($model::class." does not use the HasIdentifier trait.");
         }
 
         $identifier_name = $model->getIdentifierKey();
